@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head th:fragment="head">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="#{application_titlepane('Mi Recaudo')}"></title>
+<!-- Bootstrap core CSS -->
+<link rel="apple-touch-icon" sizes="57x57" th:href="@{/images/ico/apple-icon-57x57.png}"/>
+<link rel="apple-touch-icon" sizes="60x60" th:href="@{/images/ico/apple-icon-60x60.png}"/>
+<link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/ico/apple-icon-72x72.png}"/>
+<link rel="apple-touch-icon" sizes="76x76" th:href="@{/images/ico/apple-icon-76x76.png}"/>
+<link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/ico/apple-icon-114x114.png}"/>
+<link rel="apple-touch-icon" sizes="120x120" th:href="@{/images/ico/apple-icon-120x120.png}"/>
+<link rel="apple-touch-icon" sizes="144x144" th:href="@{/images/ico/apple-icon-144x144.png}"/>
+<link rel="apple-touch-icon" sizes="152x152" th:href="@{/images/ico/apple-icon-152x152.png}"/>
+<link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/ico/apple-icon-180x180.png}"/>
+<link rel="icon" type="image/png" sizes="192x192" th:href="@{/images/ico/android-icon-192x192.png}"/>
+<link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/ico/favicon-32x32.png}"/>
+<link rel="icon" type="image/png" sizes="96x96" th:href="@{/images/ico/favicon-96x96.png}"/>
+<link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/ico/favicon-16x16.png}"/>
+
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/fonts/css/font-awesome.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/animate.min.css}" rel="stylesheet" type="text/css" />
+<!-- Custom styling plus plugins -->
+<link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/icheck/flat/green.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/select/select2.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/bootstrap-switch.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/custom.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/jquery.min.js}"></script>
+
+<!--[if lt IE 9]>
+    <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body th:fragment="body" class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div th:fragment="left-panel" th:remove="tag">
+				<div class="col-md-3 left_col">
+					<div class="left_col scroll-view">
+						<!-- BEGIN LOGO -->
+						<div class="navbar nav_title" style="border: 0;">
+							<a th:href="@{'/'}" class="site_title" th:fragment="logo"> <img
+								th:src="@{/images/logo.png}" /> <span
+								th:text="#{application_name}"></span>
+							</a>
+						</div>
+						<!-- END LOGO -->
+						<div class="clearfix"></div>
+						<!-- BEGIN PROFILE -->
+						<div class="profile" th:fragment="profile">
+							<div class="profile_pic" th:fragment="profile-logo">
+								<img th:src="@{/images/img.png}" alt="..."
+									class="img-circle profile_img" />
+							</div>
+							<div class="profile_info">
+								<span th:text="#{application_welcome}"></span>
+								<h2 sec:authentication="name"></h2>
+								<br />
+							</div>
+						</div>
+						<!-- END PROFILE -->
+						<!-- BEGIN MENU -->
+						<div th:fragment="menu" id="sidebar-menu"
+							class="main_menu_side hidden-print main_menu">
+							<div class="menu_section">
+								<h3>Menú</h3>
+								<ul class="nav side-menu">
+									<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a><i
+											class="fa fa-folder-open-o"></i> <span
+											th:text="#{menu.opcion.solicitudes}" th:tag="tag"></span> <span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a th:href="@{/solicitudes}"
+												th:text="#{menu.opcion.solicitudes.buscar}"></a></li>
+										</ul></li>
+									<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a><i
+											class="fa fa-users"></i> <span
+											th:text="#{menu.opcion.convenios}" th:tag="tag"></span> <span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a th:href="@{/convenios}"
+												th:text="#{menu.opcion.convenios.buscar}"></a></li>
+										</ul></li>
+									<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a><i
+											class="fa fa-money"></i> <span
+											th:text="#{menu.opcion.recaudos}" th:tag="tag"></span> <span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a th:href="@{/recaudos}"
+												th:text="#{menu.opcion.recaudos.buscar}"></a></li>
+										</ul></li>
+									<li><a><i class="fa fa-bar-chart-o"></i> <span
+											th:text="#{menu.opcion.reportes}" th:tag="tag"></span> <span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/recaudos}"
+												th:text="#{menu.opcion.reportes.recaudos}"></a></li>
+											<li
+												sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/detallados/transaccionesPorConvenio}"
+												th:text="#{menu.opcion.reportes.detallados.transaccionesPorConvenio}"></a></li>
+											<li
+												sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/consolidados/transaccionesPorConvenio}"
+												th:text="#{menu.opcion.reportes.consolidados.transaccionesPorConvenio}"></a></li>
+											<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/consolidados/transaccionesPorEmpresa}"
+												th:text="#{menu.opcion.reportes.consolidados.transaccionesPorEmpresa}"></a></li>
+											<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/detallados/transaccionesPorEmpresa}"
+												th:text="#{menu.opcion.reportes.transaccionesPorEmpresa}"></a></li>
+											<li sec:authorize="hasAnyAuthority('PATROCINADOR')"><a
+												th:href="@{/reportes/detallados/diarios/transaccionesDiarias}"
+												th:text="#{menu.opcion.reportes.transaccionesDiarias}"></a></li>
+ 										</ul></li>
+								</ul>
+							</div>
+						</div>
+						<!-- END MENU -->
+						<!-- BEGIN FOOTER BUTTONS -->
+						<!-- div th:fragment="menu-footer" class="sidebar-footer hidden-small">
+	                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+	                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+	                        </a>
+	                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+	                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+	                        </a>
+	                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+	                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+	                        </a>
+	                        <a data-toggle="tooltip" data-placement="top" title="Cerrar Sesi&oacute;n">
+	                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+	                        </a>
+	                    </div -->
+						<!-- END FOOTER BUTTONS -->
+					</div>
+				</div>
+			</div>
+			<!-- BEGIN TOP NAVIGATION -->
+			<div th:fragment="top-nav" class="top_nav">
+				<div class="nav_menu">
+					<nav role="navigation">
+						<div class="nav toggle">
+							<a id="menu_toggle"> <i class="fa fa-bars"></i>
+							</a>
+						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="" th:inline="text"><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img th:src="@{/images/img.png}"
+									alt="" /><span sec:authentication="name">USERNAME</span> <span
+									class="fa fa-angle-down"></span>
+							</a>
+								<ul
+									class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+									<li><a th:href="@{/logout}"><i
+											class="fa fa-sign-out pull-right"></i>
+											[[#{label.sesion.close}]]</a></li>
+								</ul></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- END TOP NAVIGATION -->
+			<!-- BEGIN MAIN -->
+			<div th:fragment="main" class="right_col" role="main">
+				<!-- BEGIN TEMPLATE PAGE -->
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<!-- TEMPLATE PAGE -->
+					</div>
+				</div>
+				<!-- END TEMPLATE PAGE -->
+				<!-- BEGIN FOOTER -->
+				<footer th:fragment="footer">
+					<div class="">
+						<p class="pull-right">
+							Desarrollado por <a>Matrixtech</a>. | <span class="lead">
+								<img th:src="@{/images/logo2.png}" /> Matrixtech
+							</span>
+						</p>
+					</div>
+					<div class="clearfix"></div>
+				</footer>
+				<!-- END FOOTER -->
+			</div>
+			<!-- END MAIN -->
+		</div>
+	</div>
+	<!-- BEGIN DEFAULT MODAL -->
+	<div class="modal fade" id="default_modal_dialog" role="basic"
+		aria-hidden="true" th:fragment="default-modal">
+		<div class="modal-dialog">
+			<div class="modal-content" id="default_modal_dialog_content">
+				<div class="modal-body">
+					<img alt="" th:src="@{/images/indicators/64/indicator_timer.gif}" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END DEFAULT MODAL -->
+	<!-- BEGIN CORE PLUGINS -->
+
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap-switch.min.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-ui.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/jquery.form.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/icheck/icheck.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/nicescroll/jquery.nicescroll.min.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/parsley/parsley.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/parsley/i18n/es.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/datatables/js/jquery.dataTables.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/datatables/tools/js/dataTables.tableTools.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/matrix/matrixPlug.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/matrix/matrixvalidate.min.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/icheck/icheck.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/select/select2.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/select/i18n/es.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/bootbox/bootbox.min.js}" th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/jquery.blockUI.js}" th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/plugins/moment.min2.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/datepicker/daterangepicker.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/require.js}"
+		th:fragment="scripts"></script>
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script type="text/javascript" th:src="@{/js/custom.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/matrix.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/functions.js}"
+		th:fragment="scripts"></script>
+	<script type="text/javascript" th:src="@{/js/services.js}"
+		th:fragment="scripts"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script th:inline="javascript" th:fragment="scripts">
+	/*<![CDATA[*/
+		var _GLOBAL_DATATABLE_LANGUAGE = /*[[@{/js/plugins/datatables/dataTables.es.json}]]*/;
+	
+		requirejs.config({
+		    baseUrl: '/js'
+		});
+	
+		Matrix.init();
+	/*]]>*/	
+	</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<!-- BEGIN HEAD -->
+<head th:replace="layouts/default :: head">
+<!-- END HEAD -->
+</head>
+<body th:fragment="body-panel" class="nav-md">
+	<!-- BEGIN BODY -->
+	<div class="container body">
+		<!-- BEGIN CONTAINER -->
+		<div class="main_container">
+			<!-- BEIGN LEFT PANEL -->
+			<div th:replace="layouts/default :: left-panel">
+				<!-- LEFT PANEL -->
+			</div>
+			<!-- END LEFT PANEL -->
+			<!-- BEGIN TOP NAVIGATION -->
+			<div th:replace="layouts/default :: top-nav">
+				<!-- TOP NAV -->
+			</div>
+			<!-- END TOP NAVIGATION -->
+			<!-- BEGIN MAIN -->
+			<div id="body-panel-container" th:fragment="body-panel-container"
+				class="right_col" role="main" th:inline="text">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<!-- BEGIN CONDING HERE -->
+
+						<div class="page-title">
+							<div class="title_left">
+								<h3>
+									<i class="fa fa-money"></i> [[#{modulo.recaudos.titulo}]]
+								</h3>
+							</div>
+						</div>
+
+						<div th:substituteby="tags/util/messages :: messages"
+							th:remove="tag">MESSAGES</div>
+						<!-- BEGIN CONDING HERE -->
+
+						<div class="clearfix"></div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="x_panel">
+									<div class="x_title" th:inline="text">
+										<h2 th:inline="text">[[#{modulo.recaudos.listarecaudos.table.titulo}]]</h2>
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<form data-parsley-validate="true"
+											th:action="@{/solicitud/search}" method="POST">
+
+											<div class="row">
+												<div class="col-sm-3">
+													<div class="input-group">
+														<input type="text" class="form-control" name="_username" />
+														<span class="input-group-btn">
+															<button type="submit" class="btn btn-primary">Go!</button>
+														</span>
+													</div>
+												</div>
+											</div>
+										</form>
+
+
+										<form th:action="@{/}" method="POST" th:object="${solicitud}">
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="x_panel">
+														<div class="x_title">
+															<h2>Solicitud de patrocinador</h2>
+															<div class="clearfix"></div>
+														</div>
+														<div class="x_content">
+															<br />
+
+															<div class="col-md-4 col-sm-1 col-xs-1 form-group has-feedback">
+
+																<img
+																	th:src="@{(${solicitud.patrocinador?.avatar}? ${solicitud.patrocinador.avatar.urlAvatar} : '/images/img.png')}"
+																	alt="..." class="img-circle profile_img" />
+															</div>
+
+															<div class="col-md-6 col-sm-6 col-xs-12">
+																<h2>
+																	Username: <small> <label
+																		th:text="${solicitud.patrocinador?.apodo}"
+																		aria-hidden="false"></label>
+																	</small>
+																</h2>
+															</div>
+
+															<div class="col-md-6 col-sm-6 col-xs-12">
+																<h2>
+																	Email: <small> <label
+																		th:text="${solicitud.patrocinador?.email}"
+																		aria-hidden="false"></label>
+																	</small>
+																</h2>
+															</div>
+
+															<div class="col-md-6 col-sm-6 col-xs-12">
+																<select id='pre-selected-options' multiple="multiple"
+																	style="width: 300px;">
+																	<option th:each="categoria : ${categorias}"
+																		th:value="${categoria.id}"
+																		th:text="${categoria.descripcionCategoria}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- BEGIN CONDING HERE -->
+					</div>
+				</div>
+				<!-- END TEMPLATE PAGE -->
+				<!-- BEGIN FOOTER -->
+				<footer th:replace="layouts/default :: footer"></footer>
+			</div>
+			<!-- END MAIN -->
+		</div>
+	</div>
+
+	<!-- END BODY -->
+	<script type="text/javascript" th:replace="layouts/default :: scripts"></script>
+	<!-- PAGE SCRIPTS HERE -->
+	<script type="text/javascript"
+		th:src="@{/js/modules/recaudos/recaudos.js}"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			Recaudos.initTable({
+				
+			});
+		
+			Recaudos.initFilterModal({
+				url: {
+					conveniosPorEmpresa: /*[[@{/recaudos/buscar/empresa}]]*/
+				}
+			});
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>

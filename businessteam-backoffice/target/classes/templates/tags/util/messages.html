@@ -1,0 +1,31 @@
+<div th:fragment="messages" th:remove="tag">
+	<div class="alert alert-success alert-dismissible fade in" role="alert" th:if="${successMsg}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<span th:utext="${successMsg}"></span>
+	</div>
+	<div class="alert alert-info alert-dismissible fade in" role="alert" th:if="${infoMsg}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<span th:utext="${infoMsg}"></span>
+	</div>
+	<div class="alert alert-warning alert-dismissible fade in" role="alert" th:if="${warningMsg}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<span th:utext="${warningMsg}"></span>
+	</div>
+	<div class="alert alert-danger alert-dismissible fade in" role="alert" th:if="${errorMsg}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<span th:utext="${errorMsg}"></span>
+	</div>
+	<div class="clearfix"></div>
+</div>
