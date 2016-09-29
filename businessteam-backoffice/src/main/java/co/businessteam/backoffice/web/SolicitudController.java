@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.businessteam.core.domain.Patrocinador;
-import co.businessteam.core.domain.Referido;
 import co.businessteam.core.domain.Solicitud;
 import co.businessteam.core.service.CategoriaService;
 import co.businessteam.core.service.PatrocinadorService;
@@ -60,8 +59,6 @@ public class SolicitudController {
 			solicitud.setPatrocinador(patrocinador);
 			model.addAttribute(WEB_CATEGORIAS_MODEL, categoriaService.consultarTodos());
 			model.addAttribute(WEB_SOLICITUD_MODEL, solicitud);
-			Referido referido = referidoService.obtenerReferidoPorUsername("MariaAraujo1998");
-			System.out.println(referido.getId());
 		} catch (Exception e) {
 			model.addAttribute("error", "error al cargar el la lista de categorias");
 		}
@@ -73,7 +70,7 @@ public class SolicitudController {
 		
 		try {
 			if(!result.hasErrors()){
-				Referido referido = referidoService.obtenerReferidoPorUsername("MariaAraujo1998");
+				solicitud.setReferido(referidoService.obtenerReferidoPorUsername("LennyChick"));
 			}
 		} catch (Exception e) {
 
