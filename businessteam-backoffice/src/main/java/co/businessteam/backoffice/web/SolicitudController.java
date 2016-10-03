@@ -69,6 +69,8 @@ public class SolicitudController {
 	public String sendSolicitud(Model model, @Valid @ModelAttribute Solicitud solicitud, BindingResult result) {
 		
 		try {
+			
+			System.out.println("id solicitud :"+solicitud.getCategorias().get(0).getId());
 			if(!result.hasErrors()){
 				solicitud.setReferido(referidoService.obtenerReferidoPorUsername("LennyChick"));
 			}
