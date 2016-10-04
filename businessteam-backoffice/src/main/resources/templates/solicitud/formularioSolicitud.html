@@ -63,7 +63,9 @@
 										</form>
 
 
-										<form id="form_solicitud" th:action="@{/solicitud/send}" method="POST" th:object="${solicitud}">
+										<form id="form_solicitud" th:action="@{/solicitud/send}"
+											method="POST" th:object="${solicitud}">
+											
 											<div class="row">
 												<div class="col-sm-7">
 													<div class="x_panel">
@@ -101,7 +103,8 @@
 															</div>
 
 															<div class="col-md-6 col-sm-6 col-xs-12">
-																<select id="ids_categorias" th:field="*{categorias[0].id}" multiple="multiple" class="form-control selectpicker">
+																<select id="ids_categorias" multiple="multiple"
+																	class="form-control selectpicker">
 																	<option th:each="categoria : ${categorias}"
 																		th:value="${categoria.id}"
 																		th:text="${categoria.descripcionCategoria}"></option>
