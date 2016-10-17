@@ -7,11 +7,13 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import co.businessteam.core.domain.Avatar;
 import co.businessteam.core.domain.Categoria;
 import co.businessteam.core.domain.Patrocinador;
 import co.businessteam.jdbc.dao.Dao;
@@ -28,6 +30,7 @@ public class NoticiaRepositoryImpl extends Dao implements NoticiaRepository {
 	
 	private String ID_PATROCINADORES = "";
 
+	@Value("${dao.sequence.noticia}")
 	private String nameSequence;
 
 	@Deprecated
@@ -112,7 +115,7 @@ public class NoticiaRepositoryImpl extends Dao implements NoticiaRepository {
 			
 			parametros.put(":ID_CATEGORIA", !Util.isNull(idCategoria) ?  "WHERE CAT.ID ="+idCategoria : Constantes.EMPTY);
 			
-			return getJdbcTemplate().query(SQL("",parametros), (RowMapper<Noticia>) (rs, rowNum) ->{
+			return getJdbcTemplate().query(SQL("minoticia/noticia/select/SELECT_NOTICIA_X_PAT_O_CATEGORIA.sql",parametros), (RowMapper<Noticia>) (rs, rowNum) ->{
 				return cargarNoticia(rs);
 			});
 		}catch(Exception e){
@@ -126,14 +129,15 @@ public class NoticiaRepositoryImpl extends Dao implements NoticiaRepository {
 
 			Noticia noticia = new Noticia();
 			noticia.setId(rs.getLong("ID_NOTICIA"));
+			noticia.setTituloNoticia(rs.getString("TITULO_NOTICIA"));
+			noticia.setDescripcionNoticia(rs.getString("DESCRIPCION_NOTICIA"));
+			noticia.setFechaRegistro(rs.getDate("FECHA_REGISTRO"));
+			noticia.setPatrocinador(new Patrocinador());
+			noticia.getPatrocinador().setApodo(rs.getString("APODO"));
+			noticia.getPatrocinador().setAvatar(new Avatar(0l, rs.getString("URL_AVATAR")));
 			noticia.setCategoria(new Categoria());
 			noticia.getCategoria().setId(rs.getLong("ID_CATEGORIA"));
 			noticia.getCategoria().setDescripcionCategoria("DESCRIPCION_CATEGORIA");
-			noticia.setPatrocinador(new Patrocinador());
-			noticia.getPatrocinador().setApodo(rs.getString("APODO"));
-			noticia.setFechaRegistro(rs.getDate("FECHA_REGISTRO"));
-			noticia.setTituloNoticia(rs.getString("TITULO_NOTICIA"));
-			noticia.setDescripcionNoticia(rs.getString("DESCRIPCION_NOTICIA"));
 			return noticia;
 		} catch (java.sql.SQLException e) {
 			LOGGER.error("Error al cargar los datos de la noticia {}{}.", e);
