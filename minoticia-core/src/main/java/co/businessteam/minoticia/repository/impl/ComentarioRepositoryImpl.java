@@ -71,7 +71,7 @@ public class ComentarioRepositoryImpl extends Dao implements ComentarioRepositor
 	@Override
 	public List<Comentario> obtenerComentarioPorNoticia(Long idNoticia) throws SQLException {
 		try {
-			return getJdbcTemplate().query(SQL("minoticia/select/SELECT_COMENTARIOS_POR_IDNOTICIA.sql	"), new Object[] { idNoticia }, (RowMapper<Comentario>) (rs, rowNum) -> {
+			return getJdbcTemplate().query(SQL("minoticia/select/SELECT_COMENTARIOS_POR_IDNOTICIA.sql"), new Object[] { idNoticia }, (RowMapper<Comentario>) (rs, rowNum) -> {
 				Comentario comentario = new Comentario();
 				comentario.setId(rs.getLong("ID_COMENTARIO"));
 				comentario.setDescripcionComentario(rs.getString("DESCRIPCION_COMENTARIO"));
