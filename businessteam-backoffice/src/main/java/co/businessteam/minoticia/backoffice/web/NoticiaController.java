@@ -1,4 +1,4 @@
-package co.businessteam.backoffice.web;
+package co.businessteam.minoticia.backoffice.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

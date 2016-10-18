@@ -1,4 +1,4 @@
-package co.businessteam.backoffice.web;
+package co.businessteam.minoticia.backoffice.web;
 
 import javax.validation.Valid;
 
