@@ -12,7 +12,7 @@ define(function() {
 	};
 	
 	var privateSendSolicitud = function(){
-		
+		/*
 		var categorias = $("#ids_categorias").val();
 		var toArrayInt;
 		
@@ -21,6 +21,7 @@ define(function() {
 			console.log(toArrayInt[i])
 		}
 		
+		*/
 		$('#form_solicitud').submit();
 		
 	};

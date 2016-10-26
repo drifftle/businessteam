@@ -66,6 +66,8 @@
 										<form id="form_solicitud" th:action="@{/solicitud/send}"
 											method="POST" th:object="${solicitud}">
 											
+											<input type="hidden" th:field="*{patrocinador.id}" />
+											
 											<div class="row">
 												<div class="col-sm-7">
 													<div class="x_panel">

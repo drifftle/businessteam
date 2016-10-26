@@ -68,11 +68,15 @@ public class SolicitudController {
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public String sendSolicitud(Model model, @Valid @ModelAttribute Solicitud solicitud, BindingResult result) {
 		
+		System.out.println("Entro"+solicitud.getPatrocinador().getId());
 		try {
 			
-			System.out.println("id solicitud :"+solicitud.getCategorias().get(0).getId());
+			
 			if(!result.hasErrors()){
 				solicitud.setReferido(referidoService.obtenerReferidoPorUsername("LennyChick"));
+				
+				solicitudService.registrar(solicitud);
+				
 			}
 		} catch (Exception e) {
 
