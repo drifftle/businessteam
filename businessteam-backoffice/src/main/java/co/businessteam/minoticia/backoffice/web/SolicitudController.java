@@ -1,5 +1,8 @@
 package co.businessteam.minoticia.backoffice.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.businessteam.core.domain.Categoria;
 import co.businessteam.core.domain.Patrocinador;
 import co.businessteam.core.domain.Solicitud;
 import co.businessteam.core.service.CategoriaService;
@@ -74,7 +78,7 @@ public class SolicitudController {
 			
 			if(!result.hasErrors()){
 				solicitud.setReferido(referidoService.obtenerReferidoPorUsername("LennyChick"));
-				
+				solicitud.setCategorias(getCategoriasSeleccionadasPorDefault());
 				solicitudService.registrar(solicitud);
 				
 			}
@@ -98,6 +102,22 @@ public class SolicitudController {
 
 		}
 		return null;
+	}
+	
+	private List<Categoria> getCategoriasSeleccionadasPorDefault(){
+		
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		
+		Categoria categoria1 = new Categoria();
+		Categoria categoria2 = new Categoria();
+		
+		categoria1.setId(1l);
+		categoria2.setId(2l);
+		
+		categorias.add(categoria1);
+		categorias.add(categoria2);
+		
+		return categorias;
 	}
 
 }
