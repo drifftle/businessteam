@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.businessteam.core.domain.Avatar;
-import co.businessteam.core.domain.Patrocinador;
+import co.businessteam.core.domain.Usuario;
 import co.businessteam.core.domain.Rol;
 import co.businessteam.core.service.CategoriaService;
-import co.businessteam.core.service.PatrocinadorService;
+import co.businessteam.core.service.UsuarioService;
 
 @Controller
 @RequestMapping("/patrocinador")
@@ -24,7 +24,7 @@ public class PatrocinadorController {
 	private static final String MODEL_PATROCINADOR = "patrocinador";
 
 	@Autowired
-	private PatrocinadorService patrocinadorService;
+	private UsuarioService patrocinadorService;
 	
 	@Autowired
 	private CategoriaService categoriaService;
@@ -32,7 +32,7 @@ public class PatrocinadorController {
 	@RequestMapping(value = "/search")
 	public String formularioConsultarPatrocinador(Model model) {
 		
-			model.addAttribute("patrocinador", new Patrocinador());
+			model.addAttribute("patrocinador", new Usuario());
 		
 		return "patrocinador/formularioSolicitud";
 	}
@@ -40,7 +40,7 @@ public class PatrocinadorController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String buscarPatrocinadorPorApodo(Model model, @RequestParam(required = false, value = "_username") String username) {
 		try{
-			Patrocinador patrocinador = patrocinadorService.obtenerPatrocinadorPorApodo(username);
+			Usuario patrocinador = patrocinadorService.obtenerUsuarioPorUsername(username);
 			model.addAttribute("categorias", categoriaService.consultarTodos());
 			model.addAttribute("patrocinador", patrocinador);
 		}catch(Exception e){
@@ -52,12 +52,12 @@ public class PatrocinadorController {
 
 	@RequestMapping("/signup")
 	public String formularioRegistro(Model model) {
-		model.addAttribute(MODEL_PATROCINADOR, new Patrocinador());
+		model.addAttribute(MODEL_PATROCINADOR, new Usuario());
 		return "patrocinador/formularioPatrocinador";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String RegistrarPatrocinador(Model model, @ModelAttribute @Valid Patrocinador patrocinador,
+	public String RegistrarPatrocinador(Model model, @ModelAttribute @Valid Usuario patrocinador,
 			BindingResult result) {
 
 		try {
@@ -65,6 +65,7 @@ public class PatrocinadorController {
 				patrocinador.setAvatar(getDefaultAvatar());
 				patrocinador.setRol(getDefaultRol());
 				patrocinadorService.registrar(patrocinador);
+				model.addAttribute("patrocinador", new Usuario());
 			}
 		} catch (Exception e) {
 

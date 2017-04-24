@@ -8,28 +8,44 @@ define(function() {
 	};
 	
 	var privateInitComponents = function(){
-		$("#ids_categorias").select2();
+		
+		$("#categorias").select2();
+		
+		var idPatrocinador = $('#idPatrocinador').val();
+		
+		if(typeof idPatrocinador !== "undefined" && idPatrocinador != null && idPatrocinador != ""){
+			$('#form_solicitud').show();
+		}else{
+			$('#form_solicitud').hide();
+		}
+	};
+	
+	var privateEventSelected = function(){
+			
+			/*$.ajax({
+				url : '/categoria/add',
+				type : 'POST',
+				data : {
+					idCategotia : _idEmpresa
+				}
+			}).done(function(data) {
+				
+			}); 
+			
+		});
+		*/
 	};
 	
 	var privateSendSolicitud = function(){
-		/*
-		var categorias = $("#ids_categorias").val();
-		var toArrayInt;
-		
-		for(var i = 0 ; i < categorias.lenght; i++){
-			toArrayInt[i] = parseInt(categorias[i]);
-			console.log(toArrayInt[i])
-		}
-		
-		*/
 		$('#form_solicitud').submit();
 		
 	};
 	
 	return {
 		initForm : function() {
-			privateInitComponents();
+			privateEventSelected();
 			initSendSolicitud();
+			privateInitComponents();
 		}
 
 	};

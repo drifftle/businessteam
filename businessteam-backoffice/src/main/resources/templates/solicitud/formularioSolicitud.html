@@ -64,9 +64,9 @@
 
 
 										<form id="form_solicitud" th:action="@{/solicitud/send}"
-											method="POST" th:object="${solicitud}">
+											method="post" th:object="${solicitud}">
 											
-											<input type="hidden" th:field="*{patrocinador.id}" />
+											<input id="idPatrocinador" type="hidden" th:field="*{usuario.id}" />
 											
 											<div class="row">
 												<div class="col-sm-7">
@@ -82,14 +82,14 @@
 																class="col-md-4 col-sm-1 col-xs-1 form-group has-feedback">
 
 																<img
-																	th:src="@{(${solicitud.patrocinador?.avatar}? ${solicitud.patrocinador.avatar.urlAvatar} : '/images/img.png')}"
+																	th:src="@{(${solicitud.usuario?.avatar}? ${solicitud.usuario.avatar.urlAvatar} : '/images/img.png')}"
 																	alt="..." class="img-circle profile_img" />
 															</div>
 
 															<div class="col-md-6 col-sm-6 col-xs-12">
 																<h2>
 																	Username: <small> <label
-																		th:text="${solicitud.patrocinador?.apodo}"
+																		th:text="${solicitud.usuario?.apodo}"
 																		aria-hidden="false"></label>
 																	</small>
 																</h2>
@@ -98,14 +98,14 @@
 															<div class="col-md-6 col-sm-6 col-xs-12">
 																<h2>
 																	Email: <small> <label
-																		th:text="${solicitud.patrocinador?.email}"
+																		th:text="${solicitud.usuario?.email}"
 																		aria-hidden="false"></label>
 																	</small>
 																</h2>
 															</div>
 
 															<div class="col-md-6 col-sm-6 col-xs-12">
-																<select id="ids_categorias" multiple="multiple"
+																<select id="categorias" name="categorias" multiple="multiple"
 																	class="form-control selectpicker">
 																	<option th:each="categoria : ${categorias}"
 																		th:value="${categoria.id}"

@@ -1,5 +1,9 @@
-co\businessteam\backoffice\web\PatrocinadorController.class
-co\businessteam\backoffice\web\SolicitudController.class
-co\businessteam\backoffice\BusinessteamBackofficeApplication.class
-co\businessteam\backoffice\web\ReferidoController.class
-co\businessteam\backoffice\web\NoticiaController.class
+co\businessteam\minoticia\backoffice\web\UserController.class
+co\businessteam\minoticia\backoffice\BusinessteamBackofficeApplication.class
+co\businessteam\minoticia\backoffice\BusinessTeamMvcConfig.class
+co\businessteam\minoticia\backoffice\MinoticiaSecurityApplication.class
+co\businessteam\minoticia\backoffice\web\ReferidoController.class
+co\businessteam\minoticia\backoffice\web\LoginController.class
+co\businessteam\minoticia\backoffice\web\PatrocinadorController.class
+co\businessteam\minoticia\backoffice\web\NoticiaController.class
+co\businessteam\minoticia\backoffice\web\SolicitudController.class

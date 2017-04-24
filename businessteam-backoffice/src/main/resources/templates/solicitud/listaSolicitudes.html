@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<!-- BEGIN HEAD -->
+<head th:replace="layouts/default :: head">
+<!-- END HEAD -->
+</head>
+<body th:fragment="body-panel" class="nav-md">
+	<!-- BEGIN BODY -->
+	<div class="container body">
+		<!-- BEGIN CONTAINER -->
+		<div class="main_container">
+			<!-- BEIGN LEFT PANEL -->
+			<div th:replace="layouts/default :: left-panel">
+				<!-- LEFT PANEL -->
+			</div>
+			<!-- END LEFT PANEL -->
+			<!-- BEGIN TOP NAVIGATION -->
+			<div th:replace="layouts/default :: top-nav">
+				<!-- TOP NAV -->
+			</div>
+			<!-- END TOP NAVIGATION -->
+			<!-- BEGIN MAIN -->
+			<div id="body-panel-container" th:fragment="body-panel-container"
+				class="right_col" role="main" th:inline="text">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<!-- BEGIN CONDING HERE -->
+
+						<div class="page-title">
+							<div class="title_left">
+								<h3>
+									<i class="fa fa-money"></i> [[#{modulo.recaudos.titulo}]]
+								</h3>
+							</div>
+						</div>
+
+						<div th:substituteby="tags/util/messages :: messages"
+							th:remove="tag">MESSAGES</div>
+						<!-- BEGIN CONDING HERE -->
+
+						<div class="clearfix"></div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="x_panel">
+									<div class="x_title" th:inline="text">
+										<h2 th:inline="text">[[#{modulo.recaudos.listarecaudos.table.titulo}]]</h2>
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<table>
+											<thead>
+												<tr class="headings">
+													<th class="col-md-2 col-sm-6 col-xs-6"
+														th:text="#{modulo.admin.redes.solicitud.lista.solicitudes.table.columna.img.titulo}"></th>
+													<th class="col-md-1 col-sm-6 col-xs-6"
+														th:text="#{modulo.admin.redes.solicitud.lista.solicitudes.table.columna.username.titulo}"></th>
+													<th class="col-md-1 col-sm-6 col-xs-6"
+														th:text="#{modulo.admin.redes.solicitud.lista.solicitudes.table.columna.fecha.titulo}"></th>
+													<th class="col-md-1 col-sm-6 col-xs-6"
+														th:text="#{modulo.admin.redes.solicitud.lista.solicitudes.table.columna.estado.titulo}"></th>
+													<th class="col-md-1 col-sm-6 col-xs-6"></th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="solicitud : ${solicitudes}"
+													class="even pointer">
+													<td><div
+															class="col-md-3 col-sm-1 col-xs-1 has-feedback">
+															<img th:src="@{(${solicitud.referido.urlImagen})}"
+																alt="..." class="img-circle profile_img" />
+														</div></td>
+													<td class="col-md-2 col-sm-6 col-xs-6" th:text="${solicitud.referido.apodo}"></td>
+													<td class="col-md-2 col-sm-6 col-xs-6" th:text="${solicitud.fechaSolicitud}"></td>
+													<td class="col-md-2 col-sm-6 col-xs-6" th:text="${solicitud.estadoSolicitud}"></td>
+													<td>
+														<a th:href="@{/solicitud/status/}+''+${solicitud.id}" class="flat actualizar-referencia btn btn-primary btn-sm"
+														th:title="#{label.editar}"><i class="fa fa-edit"></i>
+													</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- BEGIN CONDING HERE -->
+					</div>
+				</div>
+				<!-- END TEMPLATE PAGE -->
+				<!-- BEGIN FOOTER -->
+				<footer th:replace="layouts/default :: footer"></footer>
+			</div>
+			<!-- END MAIN -->
+		</div>
+	</div>
+
+	<!-- END BODY -->
+	<script type="text/javascript" th:replace="layouts/default :: scripts"></script>
+	<!-- PAGE SCRIPTS HERE -->
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			require([ 'modules/solicitudes/solicitudes' ], function(Solicitud) {
+				Solicitud.initForm();
+				Matrix.initAjax();
+			});
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>
